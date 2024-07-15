@@ -1,0 +1,5 @@
+export enum Rols {
+  ADMIN = "ADMIN",
+  SOLICITANTE = "SOLICITANTE",
+  MESADEPARTES = "MESADEPARTES",
+}
