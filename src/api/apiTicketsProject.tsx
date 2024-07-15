@@ -1,9 +1,9 @@
 // apiInstance.js
 import axios from "axios";
-import useAuth from "../hooks/useAuth";
 import { handleRefreshToken } from "../services/refreshTokenService";
 
 const apiTicketsProject = axios.create({
+  //base_URL = "https://stf-gestor-tickets.devioz.com/api"
   baseURL: "http://localhost:3000/api",
   withCredentials: true,
 });
