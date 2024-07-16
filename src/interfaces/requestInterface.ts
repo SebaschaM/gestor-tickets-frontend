@@ -27,6 +27,12 @@ export interface UsuarioDetalle {
   usuario_id: number;
   correo_usuario: string;
   nombre_usuario: string;
+  rol: RolUsuario;
+}
+
+export interface RolUsuario {
+  rol_id: number;
+  nombre_rol: string;
 }
 
 export interface RequestResponse {

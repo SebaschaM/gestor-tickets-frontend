@@ -1,5 +1,5 @@
 import { RequestResponse } from "../interfaces/requestInterface";
-import { formatDate } from "../utils/formatDate";
+import { convertToLocalTime } from "../utils/convertToLocalTime";
 
 interface RequestTableProps {
   request: RequestResponse[];
@@ -10,6 +10,7 @@ const headers = [
   "Asunto",
   "Fecha Asignada",
   "Usuario asignado",
+  "Area asignada",
   "Tipo Solicitud",
   "Tipo Servicio",
   "Tipo Estado",
@@ -35,7 +36,6 @@ export const RequestTable = ({ request }: RequestTableProps) => {
         <tbody className="bg-white divide-y divide-gray-200">
           {request.map((req, index) => (
             <tr key={index}>
-              
               <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                 {req.numero_ticket}
               </td>
@@ -43,10 +43,19 @@ export const RequestTable = ({ request }: RequestTableProps) => {
                 {req.asunto_solicitud}
               </td>
               <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                {req.fecha_asignada ? formatDate(req.fecha_asignada) : "N/A"}
+                {req.fecha_asignada
+                  ? convertToLocalTime(req.fecha_asignada)
+                  : "Sin asignar"}
               </td>
               <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                123123
+                {req.solicitud_usuario[0]
+                  ? req.solicitud_usuario[0].usuario.nombre_usuario
+                  : "Sin asignar"}
+              </td>
+              <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
+              {req.solicitud_usuario[0]
+                  ? req.solicitud_usuario[0].usuario.rol.nombre_rol
+                  : "Sin asignar"}
               </td>
               <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
                 {req.tipo_solicitud.nombre_tipo_solicitud}
@@ -58,7 +67,7 @@ export const RequestTable = ({ request }: RequestTableProps) => {
                 {req.tipo_estado.nombre_tipo_estado}
               </td>
               <td className="px-6 py-4 text-sm text-gray-500 whitespace-nowrap">
-                {formatDate(req.fecha_creacion)}
+                {convertToLocalTime(req.fecha_creacion)}
               </td>
             </tr>
           ))}
